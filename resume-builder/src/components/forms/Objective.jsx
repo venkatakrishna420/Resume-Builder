@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateObjective } from '../../features/userDataSlice'
 
 function Objective() {
     const [objective, setObjective] = useState("")
-
+    //next line is newly added
+  const stored = useSelector((state) => state.userData.objective);
     const dispatch = useDispatch()
 
     function getData(e){

@@ -53,9 +53,24 @@ const userDataSlice = createSlice({
         },
         updateEducation(state,action){
             state.education = action.payload
-        }
+        },
+        goToSection(state, action) {
+      const section = action.payload;
+      state.formRenders = {
+        INTRO: false,
+        OBJECTIVE: false,
+        SKILLS: false,
+        PROJECTS: false,
+        EDUCATION: false
+      };
+      if (section && state.formRenders.hasOwnProperty(section)) {
+        state.formRenders[section] = true;
+      } else if (section) {
+        state.formRenders.INTRO = true;
+      }
+    },
     }
 })
 
-export const {updateIntro,updateObjective,updateEducation,updateProjects,updateSkills} =  userDataSlice.actions
+export const {updateIntro,updateObjective,updateEducation,updateProjects,updateSkills,goToSection} =  userDataSlice.actions
 export default userDataSlice.reducer

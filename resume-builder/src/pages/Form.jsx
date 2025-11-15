@@ -7,6 +7,7 @@ import Projects from '../components/forms/Projects'
 import Education from '../components/forms/Education'
 
 function Form() {
+  // const resumeDetails = useSelector((state) => state.userData)
 
     const formRenderStatus = useSelector((state)=>state.userData.formRenders)
 
