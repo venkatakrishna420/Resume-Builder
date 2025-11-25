@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Preview() {
 
-  const store = useSelector((state)=>state.formData)
+  const store = useSelector((state) => state.formData)
+  // console.log(Object.values(store.skills), "HOJJs")
   const navigate = useNavigate()
 
 
@@ -23,7 +24,7 @@ function Preview() {
     input.style.background = "white";
     input.style.backgroundImage = "none";
 
-    
+
     html2canvas(input, { scale: 3 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
@@ -44,19 +45,19 @@ function Preview() {
   };
 
 
-  console.log(store,'state data in preview effect')
-  useEffect(()=>{
-    if(!store && !localStorage.getItem("userData")){
+  // console.log(store, 'state data in preview effect')
+  useEffect(() => {
+    if (!store && !localStorage.getItem("userData")) {
       navigate("/")
     }
-  },[])
+  }, [])
 
 
   return (
     <div className="min-h-screen flex  from-gray-50 to-green-50 p-8">
 
 
-      <PreviewWraper/>
+      <PreviewWraper />
 
 
       {/* Right Side Empty Area (Optional) */}

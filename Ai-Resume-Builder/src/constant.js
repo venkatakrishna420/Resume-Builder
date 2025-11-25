@@ -10,7 +10,7 @@ const FORM_SECTIONS = {
     INTERNSHIP: "internship"
 }
 
-// Projects state structur
+// Projects state structure
 const project = [
     {
         displayQuestion: "Project Name",
@@ -109,6 +109,20 @@ const objective = [
     },
 ]
 
+
+// userdata['skills']['database'][0]['answer'].length > 0
+// // userdata.skills.database[0]['answer'].length > 0
+
+// if (initialState.skills.database[0].answer.length > 0)
+// structure:{
+//     intro,
+//     skills: [
+//         "Languag",
+//         "framework"
+//     "databases" : [{displayQuestion, answer, }]
+//         "others"
+//     ]
+// }
 const skills = {
     languages: [
         {

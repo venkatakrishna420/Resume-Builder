@@ -7,7 +7,7 @@ import { updateStoreData } from '../features/formDataSlice';
 function PreviewWraper() {
     const data = useSelector((state)=>state.formdata)
     const [userData,setUserData] = useState(data)
-    console.log(data,'data from store in wrapper')
+    // console.log(data,'data from store in wrapper')
 
     const dispatch = useDispatch()
 
@@ -496,7 +496,7 @@ function PreviewWraper() {
             dispatch(updateStoreData(localStorageData))
         }
     },[])
-    console.log(userData,'user data in wrapper')
+    // console.log(userData,'user data in wrapper')
 
     return (
         <div>
