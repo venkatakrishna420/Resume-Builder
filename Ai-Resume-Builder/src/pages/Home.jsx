@@ -43,6 +43,11 @@ function Home() {
   }, [])
 
 
+  async function callingApi(){
+    const callingApi=await axios('http://localhost:4000/users')
+  }
+
+
 
   return (
     <div className={`min-h-screen w-full absolute top-0 -z-10  flex flex-col transition-all duration-500 overflow-hidden
