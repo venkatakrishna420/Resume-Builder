@@ -2,10 +2,11 @@ import React from "react";
 import { BsPhoneFill } from "react-icons/bs";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
+import { shortenUrl } from "../constant";
 
 function PreviewResume({
   userData,
-  hasSection,
+  isAllRequiredFilled,
   sectionRenderMap,
   sectionsOrder,
 }) {
@@ -13,11 +14,11 @@ function PreviewResume({
 
   // ICON + FORMAT SETTINGS
   const CONTACT_MAP = {
-    "Git Link": {
+    gitHub: {
       icon: <FaGithub size={15} />,
       format: (v) => v,
     },
-    "LinkedIn Link": {
+    linkedIn: {
       icon: <FaLinkedin size={15} />,
       format: (v) => v,
     },
@@ -25,22 +26,27 @@ function PreviewResume({
       icon: <HiOutlineMail size={15} />,
       format: (v) => v,
     },
-    "Phone Number": {
+    phone: {
       icon: <BsPhoneFill size={15} />,
       format: (v) => `+91 ${v}`,
     },
   };
+
   const intro = userData?.intro || [];
-  const fullName = `${intro[0]?.answer || ""} ${intro[1]?.answer || ""}`;
 
-  console.log(userData, 'resume data ')
+  let userName = "" 
+  const iconsArr = []
+  intro.map((item)=>{
+    if (item.displayQuestion.toLowerCase().includes("name")) userName += item.answer+" "
+    else{
+      iconsArr.push(item)
+    }
+  })
+  const fullName = userName
+  .trim().split(" ")
+  .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+  .join(" ");
 
-  // let dat = [];
-
-  // Object.values(userData.skills).map((i) => {
-  //   // if (i == "Databases ") console.log("object");
-  //   (i[0].displayQuestion.includes("Databases")) ? console.log("object") : "";
-  // });
 
 
 
@@ -71,7 +77,7 @@ function PreviewResume({
       {/* INTRO */}
       <header>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1 style={{ fontSize: "30px", marginBottom: "4px" }}>{fullName}</h1>
+          <h1 style={{ fontSize: "30px", marginBottom: "10px" }}>{fullName}</h1>
         </div>
 
         {/* CONTACT ROW */}
@@ -83,8 +89,8 @@ function PreviewResume({
             flexWrap: "wrap",
           }}
         >
-          {intro.slice(2).map((item) => {
-            const conf = CONTACT_MAP[item.displayQuestion] || {};
+          {iconsArr.map((item) => {
+            const conf = CONTACT_MAP[item.icon] || {};
 
             return (
               <div
@@ -95,8 +101,9 @@ function PreviewResume({
                   gap: "6px",
                 }}
               >
-                {/* icon if exists */}
+
                 {conf.icon || null}
+                {/* icon if exists */}
 
                 {/* clickable link for URLs */}
                 {item.type === "url" ? (
@@ -109,7 +116,7 @@ function PreviewResume({
                       textDecoration: "underline",
                     }}
                   >
-                    {item.answer}
+                    {shortenUrl(item.answer)}
                   </a>
                 ) : (
                   <span>
@@ -125,14 +132,14 @@ function PreviewResume({
       </header>
 
       {/* OBJECTIVE */}
-      {hasSection(userData.objective) && (
+      {isAllRequiredFilled(userData.objective) && (
         <section style={{ marginTop: "6px" }}>
           <h2
             style={{
               fontSize: "18px",
               fontWeight: "bold",
               textTransform: "uppercase",
-              //   borderBottom: "1px solid #000",
+            //   borderBottom: "1px solid #000",
               paddingBottom: "4px", // space between text and line
               marginBottom: "2px", // small gap to the paragraph
               lineHeight: "1.2", // stable text height
@@ -142,15 +149,15 @@ function PreviewResume({
             Objective
           </h2>
           <div style={{
-            height: "1px",
-            width: "100%",
-            backgroundColor: "black",
-            marginTop: "6px"
+            height:"1px",
+            width:"100%",
+            backgroundColor:"black",
+            marginTop:"6px"
           }}>
 
           </div>
           <p
-            style={{ marginTop: "3px", fontSize: "14px", lineHeight: "19px" }}
+            style={{ marginTop: "3px", fontSize: "14px", lineHeight:"19px"}}
             dangerouslySetInnerHTML={{ __html: userData.objective[0].answer }}
           ></p>
         </section>

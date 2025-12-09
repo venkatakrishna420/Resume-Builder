@@ -1,68 +1,81 @@
+
 import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { customStyles, skillsOptions } from "../constant";
 
+const MultiSelect = ({
+  item,
+  inputChange,
+  subsectionKey,
+  darkMode,
+}) => {
+  const skillType = subsectionKey || item.id;
+  const options = skillsOptions[skillType] || [];
 
+  console.log(subsectionKey,'sub section key in multiselect')
 
-const MultiSelect = ({ item, section, inputChange, subsectionKey, darkMode }) => {
+  const parseValue = () => {
+    if (!item.answer) return [];
 
-    const skillType = subsectionKey || item.id;
-    const options = skillsOptions[skillType] || [];
+    let answer = item.answer;
 
-    const parseValue = () => {
-        if (!item.answer) return [];
+    // Convert "React, JavaScript" → ["React", "JavaScript"]
+    if (typeof answer === "string") {
+      answer = answer.split(",").map((v) => v.trim());
+    }
 
-        if (Array.isArray(item.answer)) {
-            return item.answer.map(val =>
-                typeof val === 'string'
-                    ? options.find(opt => opt.value === val || opt.label === val) || { value: val, label: val }
-                    : val
-            );
-        }
+    // Convert ["React"] → [{label:"React", value:"React"}]
+    if (Array.isArray(answer)) {
+      return answer.map((val) => {
+        if (typeof val === "object") return val; // already correct
 
-        if (typeof item.answer === 'string') {
-            return item.answer.split(',').map(val => {
-                const trimmed = val.trim();
-                return options.find(opt => opt.value === trimmed || opt.label === trimmed) || { value: trimmed, label: trimmed };
-            }).filter(Boolean);
-        }
+        const match = options.find(
+          (opt) => opt.label === val || opt.value === val
+        );
 
-        return [];
-    };
+        return match || { label: val, value: val };
+      });
+    }
 
-    const handleChange = (selectedOptions) => {
-        const values = selectedOptions ? selectedOptions.map(opt => opt.label).join(', ') : '';
+    return [];
+  };
 
-        // Call inputChange to update Redux store
-        inputChange(values, item);
-    };
+  const handleChange = (selectedOptions) => {
+    const values = selectedOptions
+      ? selectedOptions.map((opt) => opt.value).join(", ")
+      : "";
 
+    inputChange(values, item,subsectionKey);
+  };
 
-    return (
-        <div className="w-full">
-            <Select
-                isMulti
-                name={item.id}
-                options={options}
-                // defaultValue={}
-                value={parseValue()}
-                onChange={handleChange}
-                placeholder={`Select ${item.displayQuestion || 'skills'}...`}
-                classNamePrefix="select"
-                styles={customStyles}
-                isClearable
-            />
+  return (
+    <div className="w-full">
+      <Select
+        isMulti
+        name={item.id}
+        options={options}
+        // defaultValue={}
+        value={parseValue()}
+        onChange={handleChange}
+        placeholder={`Select ${item.displayQuestion || "skills"}...`}
+        classNamePrefix="select"
+        styles={customStyles}
+        isClearable
+       className={darkMode ? "text-black bg-gray-200" : "text-gray-600 "}
+      />
 
-
-            {item.answer && (
-                <div className={`mt-2 text-sm transition-colors duration-500 ${darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}>
-                    <span className="font-medium">Selected: </span>
-                    {item.answer}
-                </div>
-            )}
+      {item.answer && (
+        <div
+          className={`mt-2 text-sm transition-colors duration-500 ${
+            darkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
+          <span className="font-medium">Selected: </span>
+          {item.answer}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default MultiSelect;

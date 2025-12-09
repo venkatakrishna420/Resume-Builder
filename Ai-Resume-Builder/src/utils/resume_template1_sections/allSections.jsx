@@ -2,7 +2,7 @@ import { FORM_SECTIONS } from "../../constant";
 
 export default function useResumeSection({
     userData,
-    hasSection,
+    isAllRequiredFilled,
     getAns,
     onDragStart,
     onDragOver,
@@ -13,8 +13,10 @@ export default function useResumeSection({
 
     // ---------------------- SKILLS -----------------------
     const renderSkills = () => {
-        if (!hasSection(userData.skills)) return null;
+        // Custom function to check if all required fields are filled 
+        if (!isAllRequiredFilled(userData.skills)) return null;
 
+        // Replace this with array of skills
         const ORDER = ["languages", "frameworks", "database", "others"];
 
         return (
@@ -42,7 +44,7 @@ export default function useResumeSection({
 
                 {ORDER.map((key) => {
                     const arr = userData.skills[key];
-                    if (!hasSection(arr)) return null;
+                    if (!isAllRequiredFilled(arr)) return null;
 
                     return (
                         <div key={key} style={{ marginTop: "-2px" }}>
@@ -61,13 +63,13 @@ export default function useResumeSection({
 
     // ---------------------- EDUCATION -----------------------
     const renderEducation = () => {
-        if (!hasSection(userData.education)) return null;
+        if (!isAllRequiredFilled(userData.education)) return null;
 
         const eduKeys = ["Degree", "higherSchool", "school"];
 
         const renderEduBlock = (key) => {
             const data = userData.education[key];
-            if (!hasSection(data)) return null;
+            if (!isAllRequiredFilled(data)) return null;
 
             const cgpa = getAns(data, "Degree CGPA/Percentage") || getAns(data, "12th CGPA/Percentage") || getAns(data, "10th CGPA/Percentage");
             const institute = getAns(data, "College Name") || getAns(data, "Junior College Name") || getAns(data, "School Name");
@@ -155,7 +157,7 @@ export default function useResumeSection({
 
     // ---------------------- PROJECTS -----------------------
     const renderProjects = () => {
-        if (!hasSection(userData.projects)) return null;
+        if (!isAllRequiredFilled(userData.projects)) return null;
 
         const projectKeys = ["project1", "project2", "project3"];
 
@@ -184,7 +186,7 @@ export default function useResumeSection({
 
                 {projectKeys.map((key, index) => {
                     const projectData = userData.projects[key];
-                    if (!hasSection(projectData)) return null;
+                    if (!isAllRequiredFilled(projectData)) return null;
 
                     const name = getAns(projectData, "Project Name");
                     const description = getAns(projectData, "Project Description");
@@ -242,7 +244,7 @@ export default function useResumeSection({
 
     // ---------------------- CERTIFICATIONS -----------------------
     const renderCertifications = () => {
-        if (!hasSection(userData.certifications)) return null;
+        if (!isAllRequiredFilled(userData.certifications)) return null;
 
         const normalizeCertifications = (raw) => {
             let result = [];
