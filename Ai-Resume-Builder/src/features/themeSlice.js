@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { encryptData, decryptData } from "../utils/Encryption";
+import { encryptData, decryptData } from "../utils/encryption/encryptAndDecrypt";
 
 
 // Key we want to use in localStorage (will be encrypted)
 const STORAGE_KEY = "darkMode";
 
-function  encrypttheme(){
+
+
+function  encryptTheme(){
   // Encrypt the key
   const encryptedKey = encryptData(STORAGE_KEY);
   
@@ -21,8 +23,11 @@ function  encrypttheme(){
   // Convert string to boolean
   return decryptValue === "true";
 }
+
+
+
 // Initial state
-const initialTheme = encrypttheme();
+const initialTheme = encryptTheme();
 
 // Create slice
 const themeSlice = createSlice({
@@ -44,6 +49,8 @@ const themeSlice = createSlice({
     }
   }
 });
+
+
 
 export const { toggleTheme } = themeSlice.actions;
 export default themeSlice.reducer;
