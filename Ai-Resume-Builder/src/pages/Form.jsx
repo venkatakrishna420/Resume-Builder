@@ -11,7 +11,7 @@ function Form() {
     const [submittedFormCount, setSubmittedFormCount] = useState(1);
     const dispatch = useDispatch();
     const darkMode = useSelector((state) => state.theme); // Get dark mode from Redux
-    const LazyFormImageComponent = lazy(() => import("../components/FormImage"));
+    // const LazyFormImageComponent = lazy(() => import("../components/FormImage"));
 
 
 
