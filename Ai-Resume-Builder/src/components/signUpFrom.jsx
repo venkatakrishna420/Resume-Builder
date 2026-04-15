@@ -1,11 +1,10 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 
 function SingUpFrom() {
 
-    const [firstName,setFirstName] = useState("")
-    const [lastName,setLastName] = useState("")
-    const [phoneNumber,setPhoneNumber] = useState()
+    // const [firstName,setFirstName] = useState("")
+    // const [lastName,setLastName] = useState("")
+    // const [phoneNumber,setPhoneNumber] = useState()
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 

@@ -10,7 +10,9 @@ export default function useDragAndDrop(initialSections) {
         e.dataTransfer.effectAllowed = "move";
         try {
             e.dataTransfer.setData("text/plain", sectionId);
-        } catch {}
+        } catch (exception) {
+            console.log(exception)
+        }
         e.currentTarget.style.opacity = "0.6";
     };
 

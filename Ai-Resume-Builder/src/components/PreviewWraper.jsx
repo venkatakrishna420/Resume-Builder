@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+// import { useRef } from 'react'
 import PreviewResume from './PreviewResume';
 import { useDispatch, useSelector } from 'react-redux';
 import { FORM_SECTIONS } from '../constant';

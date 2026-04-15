@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaLock, FaTimes } from "react-icons/fa";
 import { templates, TEMPLATES_ID } from "../constant";
 import { useDispatch, useSelector } from "react-redux";
+// import { dispatch } from "react-redux";
 import { clearStoreData, updateStoreData } from "../features/formDataSlice";
 import templateOneInitialState from "../utils/templatesQuestions/template_1";
 import templateTwoInitialState from "../utils/templatesQuestions/template_2";
