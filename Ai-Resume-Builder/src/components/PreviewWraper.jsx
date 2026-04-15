@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+// import { useRef } from 'react'
 import PreviewResume from './PreviewResume';
 import { useDispatch, useSelector } from 'react-redux';
 import { FORM_SECTIONS } from '../constant';
@@ -50,18 +51,18 @@ function PreviewWraper() {
     // ----------------- Drag & Drop logic -----------------
     // Sections we want draggable (initial order)
     // Use state to maintain order
-    const {sectionsOrder,onDragStart,onDragOver,onDrop,onDragEnd,getSectionContainerStyle} = useDragAndDrop(initialSections);
+    const { sectionsOrder, onDragStart, onDragOver, onDrop, onDragEnd, getSectionContainerStyle } = useDragAndDrop(initialSections);
 
-    const {renderSkills,renderEducation,renderProjects,renderCertifications} = useResumeSection({
-    userData,
-    isAllRequiredFilled,
-    getAns,
-    onDragStart,
-    onDragOver,
-    onDrop,
-    onDragEnd,
-    getSectionContainerStyle
-});
+    const { renderSkills, renderEducation, renderProjects, renderCertifications } = useResumeSection({
+        userData,
+        isAllRequiredFilled,
+        getAns,
+        onDragStart,
+        onDragOver,
+        onDrop,
+        onDragEnd,
+        getSectionContainerStyle
+    });
 
 
     // ----- Render functions for each section -----

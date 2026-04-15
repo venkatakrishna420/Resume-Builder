@@ -597,9 +597,9 @@
 
 
 import { nanoid } from "@reduxjs/toolkit";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
-import { BsPhoneFill } from "react-icons/bs";
+// import { FaGithub, FaLinkedin } from "react-icons/fa";
+// import { HiOutlineMail } from "react-icons/hi";
+// import { BsPhoneFill } from "react-icons/bs";
 const FORM_SECTIONS = {
   INTRO: "intro",
   OBJECTIVE: "objective",
@@ -965,9 +965,14 @@ const initialState = {
   education,
 
   certifications,
+  // intership: {
+  //   intership1: [...intership],
+  //   intership2: [...intership],
+  //   intership3: [...intership],
+  // },
 
   // Lets add internship for one more template
-  // intership,
+ // intership,
 
   renderingQuestions: intro,
   currentForm: FORM_SECTIONS.INTRO

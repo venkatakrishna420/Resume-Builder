@@ -9,7 +9,7 @@ const NestedForm = ({ nestedData, section, labelFormatter, inputChange }) => {
   const [activeTab, setActiveTab] = useState(tabs[0] || null);
   const [skippedTabs, setSkippedTabs] = useState([]);
 
-
+  // Implement this logic and use the handleSkipTab function in the required logic
   // ---------- SKIP LOGIC -------------
   const handleSkipTab = () => {
     // Remember that the current tab was skipped   prev = previous skipped tabs   activeTab = the tab we're currently on

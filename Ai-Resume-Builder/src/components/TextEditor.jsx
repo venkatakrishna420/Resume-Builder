@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useSelector } from "react-redux";
 import { enhanceText } from "../utils/aiApi/enhanceText";
 
-const TextEditor = ({ item, section, inputChange, subsectionKey }) => {
+const TextEditor = ({ item, inputChange, subsectionKey }) => {
   const editorRef = useRef(null);
   const [isAILoading, setIsAILoading] = useState(false);
   const [error, setError] = useState("");
@@ -132,7 +132,7 @@ const TextEditor = ({ item, section, inputChange, subsectionKey }) => {
         >
           <Editor
             key={isBulletPoint}
-            apiKey="j8bl7dzuvvkrs2og2grjdqqjy1mx9rmujnys1y6fwej0q21m"
+            apiKey={import.meta.env.VITE_TINY_MCE_API_KEY}
             onInit={(evt, editor) => {
               editorRef.current = editor;
               setIsEditorReady(true);

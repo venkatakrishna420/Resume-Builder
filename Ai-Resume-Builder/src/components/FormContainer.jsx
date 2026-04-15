@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateData, updateFormRender, updateStoreData, updateBackRender, } from "../features/formDataSlice";
+import { updateData, updateFormRender, updateBackRender, } from "../features/formDataSlice";
+// import {updateStoreData} from "../features/formDataSlice";
 import { FORM_SECTIONS, getLabel, SECTION_TITLES, isRequiredFieldsFilled, validateField, } from "../constant";
 import { useNavigate } from "react-router-dom";
 import RenderingBasicForm from "./RenderBasicForm";
 import NestedForm from "./NestedForm";
-import { useCallback, useEffect, useMemo, useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
+// import {useMemo} from "react"
 
 function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
     const currentForm = useSelector((state) => state.formData.currentForm);
@@ -54,7 +55,7 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
 
     // Update answer for each question in store
     function inputChange(text, item, subSectionKey = null) {
-        console.log(subSectionKey,item,text,'input chage params')
+        console.log(subSectionKey, item, text, 'input chage params')
         // UPDATE FIELD VALUE , VALIDATE
         const updatedItem = { ...item, answer: text };
 
@@ -113,9 +114,6 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
     function isFormNested() {
         // Check if the current form section has subsections
         // Check if renderingArray exists and is an object (not an array)
-        console.log( renderingArray &&
-            typeof renderingArray === "object" &&
-            !Array.isArray(renderingArray),'condition to tell is ')
         if (
             renderingArray &&
             typeof renderingArray === "object" &&
@@ -123,17 +121,19 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
         ) {
             // Convert Object values in array
             const values = Object.values(renderingArray || {});
-            
+
             // Check if every value inside the object is an array, returns boolean
             const allValuesAreArrays = values.every((value) => Array.isArray(value));
-            console.log("step 1 passed",allValuesAreArrays)
+            console.log("step 1 passed", allValuesAreArrays)
 
             // Update if the form is nested form or not 
             setIsNested(allValuesAreArrays);
+        } else {
+            // Reset to false if it's an array or not a valid object
+            setIsNested(false);
         }
-
     }
-    
+
     useEffect(() => {
         // Check if form is nested form
         isFormNested()
@@ -159,7 +159,7 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
                         } p-6 rounded-lg transition-colors`}
                     onSubmit={getData}
                 >
-                    {isNested===true ? (
+                    {isNested === true ? (
                         <NestedForm
                             nestedData={renderingArray}
                             section={currentForm}
