@@ -101,7 +101,7 @@ const TextEditor = ({ item, inputChange, subsectionKey }) => {
     setIsBulletPoint(["projects", "experience"].includes(currentForm));
   }, [currentForm]);
 
-  
+
 
   return (
     <div className="relative w-full col-span-2">

@@ -10,7 +10,7 @@ const RenderingBasicForm = ({ questions, inputChange, section, subsectionKey }) 
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-      {questions?.map((item, idx) => (
+      {questions.map((item, idx) => (
         <div
           key={item.id || idx}
           className={`${item.isEditorEnabled ? "col-span-2" : ""}`}>

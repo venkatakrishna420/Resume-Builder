@@ -18,28 +18,28 @@ function App() {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
 
         <Routes>
-           {/* Public Route */}
-            <Route path={ROUTES_PATH.HOME} element={<Home />} />
-         {/* Protected Form Route */}
-        <Route 
-          path={ROUTES_PATH.FORM_SECTIONS} 
-          element={
-            <ProtectedRoute route={ROUTES_PATH.FORM_SECTIONS}>
-              <Form />
-            </ProtectedRoute>
-          } 
-        />
-                  {/* Protected Preview Route */}
-        <Route 
-          path={ROUTES_PATH.PREVIEW} 
-          element={
-            <ProtectedRoute route={ROUTES_PATH.PREVIEW}>
-              <Preview />
-            </ProtectedRoute>
-          } 
-        />
-        {/* Download Resume Success Page */}
-        <Route path={ROUTES_PATH.RESUME_SUCCESS} element={<DownloadSuccess />} />
+          {/* Public Route */}
+          <Route path={ROUTES_PATH.HOME} element={<Home />} />
+          {/* Protected Form Route */}
+          <Route
+            path={ROUTES_PATH.FORM_SECTIONS}
+            element={
+              <ProtectedRoute route={ROUTES_PATH.FORM_SECTIONS}>
+                <Form />
+              </ProtectedRoute>
+            }
+          />
+          {/* Protected Preview Route */}
+          <Route
+            path={ROUTES_PATH.PREVIEW}
+            element={
+              <ProtectedRoute route={ROUTES_PATH.PREVIEW}>
+                <Preview />
+              </ProtectedRoute>
+            }
+          />
+          {/* Download Resume Success Page */}
+          <Route path={ROUTES_PATH.RESUME_SUCCESS} element={<DownloadSuccess />} />
         </Routes>
       </ErrorBoundary>
 

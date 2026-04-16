@@ -85,7 +85,7 @@ function ProgressBar({ submittedFormCount }) {
               <div className="absolute w-16 h-16 rounded-full bg-blue-300 opacity-25 animate-ping" style={{ animationDelay: '0.5s' }}></div>
             </>
           )}
-          
+
           {/* Main circle */}
           <div
             aria-label={`Step ${i}`}
@@ -103,7 +103,7 @@ function ProgressBar({ submittedFormCount }) {
           <div
             key={`line-${i}`}
             className={`flex-1 h-1 transition-all duration-300
-              ${i < submittedFormCount ?  "bg-green-500":"bg-gray-500" }
+              ${i < submittedFormCount ? "bg-green-500" : "bg-gray-500"}
             `}
           ></div>
         );
@@ -115,7 +115,7 @@ function ProgressBar({ submittedFormCount }) {
 
   return (
     <div className="w-full flex items-center gap-3 mt-16">
-        {/* React will render the elements from the array if array is of ui elements */}
+      {/* React will render the elements from the array if array is of ui elements */}
       {steps}
     </div>
   );

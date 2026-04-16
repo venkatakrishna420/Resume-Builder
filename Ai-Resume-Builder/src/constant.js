@@ -972,7 +972,7 @@ const initialState = {
   // },
 
   // Lets add internship for one more template
- // intership,
+  // intership,
 
   renderingQuestions: intro,
   currentForm: FORM_SECTIONS.INTRO
@@ -1226,7 +1226,7 @@ const customStyles = {
 
 // Validate form to fill all required fields
 function isRequiredFieldsFilled(section) {
-    console.log(section,'section')
+  console.log(section, 'section')
   if (!section) return false;
 
   // Some answers (especially from text editor) may
@@ -1385,7 +1385,7 @@ function shortenUrl(url) {
 }
 
 
-const ROUTES_PATH = {HOME : "/",FORM_SECTIONS : "/userDetails",PREVIEW :"/preview", RESUME_SUCCESS:"/resume-success"}
+const ROUTES_PATH = { HOME: "/", FORM_SECTIONS: "/userDetails", PREVIEW: "/preview", RESUME_SUCCESS: "/resume-success" }
 
 
 
