@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Call gemini api with and return optimised text with given maxLength and minLength
-export async function enhanceText(inputText, maxLength=800, minLength =300) {
+export async function enhanceText(inputText, maxLength = 800, minLength = 300) {
   if (!inputText || !inputText.trim()) {
     return { error: "Input cannot be empty." };
   }
@@ -29,7 +29,7 @@ export async function enhanceText(inputText, maxLength=800, minLength =300) {
   };
 
   const apiUrl =
-      import.meta.env.VITE_GEMINI_API_URL;
+    import.meta.env.VITE_GEMINI_API_URL;
 
   try {
     const response = await axios.post(apiUrl, payload, {

@@ -7,7 +7,7 @@ import templateTwoInitialState from "../templatesQuestions/template_2";
 export function selectTemplateQuestions(template) {
     if (template.id === TEMPLATES_ID.TEMPLATE_1) {
         return templateOneInitialState
-    }else if(template.id === TEMPLATES_ID.TEMPLATE_2){
+    } else if (template.id === TEMPLATES_ID.TEMPLATE_2) {
         return templateTwoInitialState
     }
 }
