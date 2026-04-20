@@ -6,11 +6,11 @@ const Input = ({ item, inputChange, subsectionKey }) => {
 
     //  HANDLE CHANGE FUNCTION
     const handleChange = (value) => {
-        console.log(value,item,'value and item')
-        inputChange(value, item,subsectionKey);
+        console.log(value, item, 'value and item')
+        inputChange(value, item, subsectionKey);
     };
 
-   //  DROPDOWN SUPPORT (12th / Diploma)
+    //  DROPDOWN SUPPORT (12th / Diploma)
     if (item.element === "select") {
         return (
             <div>
@@ -25,7 +25,7 @@ const Input = ({ item, inputChange, subsectionKey }) => {
                     <option value="" disabled>
                         -- Select --
                     </option>
-                    
+
                     {item.options?.map((opt) => (
                         <option key={opt.value} value={opt.value}>
                             {opt.label}

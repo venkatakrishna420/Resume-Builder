@@ -4,7 +4,7 @@
 
 import { useNavigate } from "react-router-dom";
 
-function ErrorFallback({resetErrorBoundary }) {
+function ErrorFallback({ resetErrorBoundary }) {
   const navigate = useNavigate();
 
   const goHome = () => {
@@ -36,7 +36,7 @@ function ErrorFallback({resetErrorBoundary }) {
         Something went wrong
       </h2>
 
-      
+
 
       <button
         onClick={goHome}

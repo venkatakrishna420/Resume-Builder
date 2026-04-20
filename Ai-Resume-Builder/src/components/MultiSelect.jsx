@@ -12,7 +12,7 @@ const MultiSelect = ({
   const skillType = subsectionKey || item.id;
   const options = skillsOptions[skillType] || [];
 
-  console.log(subsectionKey,'sub section key in multiselect')
+  console.log(subsectionKey, 'sub section key in multiselect')
 
   const parseValue = () => {
     if (!item.answer) return [];
@@ -45,7 +45,7 @@ const MultiSelect = ({
       ? selectedOptions.map((opt) => opt.value).join(", ")
       : "";
 
-    inputChange(values, item,subsectionKey);
+    inputChange(values, item, subsectionKey);
   };
 
   return (
@@ -61,14 +61,13 @@ const MultiSelect = ({
         classNamePrefix="select"
         styles={customStyles}
         isClearable
-       className={darkMode ? "text-black bg-gray-200" : "text-gray-600 "}
+        className={darkMode ? "text-black bg-gray-200" : "text-gray-600 "}
       />
 
       {item.answer && (
         <div
-          className={`mt-2 text-sm transition-colors duration-500 ${
-            darkMode ? "text-gray-300" : "text-gray-600"
-          }`}
+          className={`mt-2 text-sm transition-colors duration-500 ${darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
         >
           <span className="font-medium">Selected: </span>
           {item.answer}

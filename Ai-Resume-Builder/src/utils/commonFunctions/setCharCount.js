@@ -72,7 +72,7 @@ function setCharCount(userData) {
     minCount = 550;
     maxCount = 800;
   } else {
-    minCount =480 ;
+    minCount = 480;
     maxCount = 700;
   }
 
