@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import RenderingBasicForm from "./RenderBasicForm";
 
-const NestedForm = ({ nestedData, section, labelFormatter, inputChange }) => {
+const NestedForm = ({ nestedData, section, labelFormatter, inputChange, errors }) => {
 
   // Storing sub section as tabls
   const tabs = Object.keys(nestedData || {});
@@ -99,6 +99,7 @@ const NestedForm = ({ nestedData, section, labelFormatter, inputChange }) => {
               inputChange={inputChange}
               section={section}
               subsectionKey={key}
+              errors={errors}
             />
           </div>
         ))}

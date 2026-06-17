@@ -676,7 +676,7 @@ function validateField(item, allItems = []) {
 
   // EMAIL VALIDATION
 
-  if (item.type === "mail") {
+  if (item.type === "email") {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(value)) {
       return { valid: false, message: "Please enter a valid email address" };

@@ -131,11 +131,18 @@ const formDataSlice = createSlice({
         },
 
         clearStoreData() {
-             localStorage.removeItem("userData");
+            localStorage.removeItem("userData");
             return {};
+        },
+
+        setCurrentFormSection(state, action) {
+            const section = action.payload;
+            state.currentForm = section;
+            state.renderingQuestions = state[section];
+            localStorage.setItem("userData", JSON.stringify(state));
         }
     }
 });
 
-export const { updateData, updateFormRender, updateBackRender, updateStoreData, clearStoreData } = formDataSlice.actions
+export const { updateData, updateFormRender, updateBackRender, updateStoreData, clearStoreData, setCurrentFormSection } = formDataSlice.actions
 export default formDataSlice.reducer

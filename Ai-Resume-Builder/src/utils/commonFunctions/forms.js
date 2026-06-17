@@ -3,7 +3,7 @@ const getInputType = (item) => {
     case "textarea": return "textarea";
     case "date": return "date";
     case "url": return "url";
-    case "mail": return "email";
+    case "email": return "email";
     case "number": return "tel";
     default: return "text";
   }

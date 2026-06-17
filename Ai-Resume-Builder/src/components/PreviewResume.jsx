@@ -9,6 +9,7 @@ function PreviewResume({
   isAllRequiredFilled,
   sectionRenderMap,
   sectionsOrder,
+  onEditSection,
 }) {
   // put these near the top of your file, inside the component file
 
@@ -133,21 +134,33 @@ function PreviewResume({
 
       {/* OBJECTIVE */}
       {isAllRequiredFilled(userData.objective) && (
-        <section style={{ marginTop: "6px" }}>
+        <section style={{ marginTop: "6px", position: "relative" }}>
           <h2
             style={{
               fontSize: "18px",
               fontWeight: "bold",
               textTransform: "uppercase",
-              //   borderBottom: "1px solid #000",
-              paddingBottom: "4px", // space between text and line
-              marginBottom: "2px", // small gap to the paragraph
-              lineHeight: "1.2", // stable text height
-              display: "inline-block", // avoids weird border behavior
+              paddingBottom: "4px",
+              marginBottom: "2px",
+              lineHeight: "1.2",
+              display: "inline-block",
             }}
           >
             Objective
           </h2>
+          {onEditSection && (
+            <button
+              style={{
+                position: "absolute", top: "0", right: "0", fontSize: "10px",
+                cursor: "pointer", background: "#e5e7eb", border: "none",
+                padding: "2px 8px", borderRadius: "4px", color: "#374151", zIndex: 5,
+              }}
+              onClick={() => onEditSection("objective")}
+              type="button"
+            >
+              Edit
+            </button>
+          )}
           <div style={{
             height: "1px",
             width: "100%",
@@ -158,7 +171,7 @@ function PreviewResume({
           </div>
           <p
             style={{ marginTop: "3px", fontSize: "14px", lineHeight: "19px" }}
-            dangerouslySetInnerHTML={{ __html: userData.objective[0].answer }}
+            dangerouslySetInnerHTML={{ __html: userData?.objective?.[0]?.answer || "" }}
           ></p>
         </section>
       )}

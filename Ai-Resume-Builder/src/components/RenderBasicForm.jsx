@@ -4,7 +4,7 @@ import MultiSelect from "./MultiSelect";
 import TextEditor from "./TextEditor";
 
 
-const RenderingBasicForm = ({ questions, inputChange, section, subsectionKey }) => {
+const RenderingBasicForm = ({ questions, inputChange, section, subsectionKey, errors }) => {
   const darkMode = useSelector((state) => state.theme);
 
 
@@ -57,7 +57,7 @@ const RenderingBasicForm = ({ questions, inputChange, section, subsectionKey }) 
               inputChange={inputChange}
               darkMode={darkMode}
               subsectionKey={subsectionKey}
-
+              error={errors?.[item.id]}
             />
           )}
 
