@@ -55,8 +55,23 @@ function PreviewWraper() {
     const initialSections = [FORM_SECTIONS.SKILLS, FORM_SECTIONS.PROJECT, FORM_SECTIONS.EDUCATION, FORM_SECTIONS.CERTIFICATIONS];
 
     // ----------------- Drag & Drop logic -----------------
+    function groupAnagrams(strs) {
+    const obj = {};
+
+    for (let str of strs) {
+        let key = str.split("").sort().join("");
+
+        if (!obj[key]) {
+            obj[key] = [];
+        }
+
+        obj[key].push(str);
+    }
+
+    return Object.values(obj);
+}
     // Sections we want draggable (initial order)
-    // Use state to maintain order
+    
     const { sectionsOrder, onDragStart, onDragOver, onDrop, onDragEnd, getSectionContainerStyle } = useDragAndDrop(initialSections);
 
     const { renderSkills, renderEducation, renderProjects, renderCertifications } = useResumeSection({
