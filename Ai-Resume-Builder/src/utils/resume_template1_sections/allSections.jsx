@@ -1,5 +1,19 @@
 import { FORM_SECTIONS } from "../../constant";
 
+const editBtnStyle = {
+    position: "absolute",
+    top: "0",
+    right: "0",
+    fontSize: "10px",
+    cursor: "pointer",
+    background: "#e5e7eb",
+    border: "none",
+    padding: "2px 8px",
+    borderRadius: "4px",
+    color: "#374151",
+    zIndex: 5,
+};
+
 export default function useResumeSection({
     userData,
     isAllRequiredFilled,
@@ -8,7 +22,8 @@ export default function useResumeSection({
     onDragOver,
     onDrop,
     onDragEnd,
-    getSectionContainerStyle
+    getSectionContainerStyle,
+    onEditSection
 }) {
 
     // ---------------------- SKILLS -----------------------
@@ -27,13 +42,18 @@ export default function useResumeSection({
                 onDragOver={(e) => onDragOver(e, FORM_SECTIONS.SKILLS)}
                 onDrop={(e) => onDrop(e, FORM_SECTIONS.SKILLS)}
                 onDragEnd={onDragEnd}
-                style={{ ...getSectionContainerStyle(FORM_SECTIONS.SKILLS), marginTop: "1px" }}
+                style={{ ...getSectionContainerStyle(FORM_SECTIONS.SKILLS), marginTop: "1px", position: "relative" }}
             >
                 <h2
                     style={{ fontSize: "18px", fontWeight: "bold", textTransform: "uppercase", paddingBottom: "4px", marginBottom: "0px", lineHeight: "1.2", display: "inline-block" }}
                 >
                     Skills
                 </h2>
+                {onEditSection && (
+                    <button style={editBtnStyle} onClick={(e) => { e.stopPropagation(); onEditSection(FORM_SECTIONS.SKILLS); }} type="button">
+                        Edit
+                    </button>
+                )}
 
                 <div style={{
                     height: "1px",
@@ -135,13 +155,18 @@ export default function useResumeSection({
                 onDragOver={(e) => onDragOver(e, FORM_SECTIONS.EDUCATION)}
                 onDrop={(e) => onDrop(e, FORM_SECTIONS.EDUCATION)}
                 onDragEnd={onDragEnd}
-                style={getSectionContainerStyle(FORM_SECTIONS.EDUCATION)}
+                style={{ ...getSectionContainerStyle(FORM_SECTIONS.EDUCATION), position: "relative" }}
             >
                 <h2
                     style={{ fontSize: "18px", fontWeight: "bold", textTransform: "uppercase", paddingBottom: "4px", marginBottom: "0px", lineHeight: "1.2", display: "inline-block" }}
                 >
                     Education
                 </h2>
+                {onEditSection && (
+                    <button style={editBtnStyle} onClick={(e) => { e.stopPropagation(); onEditSection(FORM_SECTIONS.EDUCATION); }} type="button">
+                        Edit
+                    </button>
+                )}
 
                 <div style={{
                     height: "1px",
@@ -169,13 +194,18 @@ export default function useResumeSection({
                 onDragOver={(e) => onDragOver(e, FORM_SECTIONS.PROJECT)}
                 onDrop={(e) => onDrop(e, FORM_SECTIONS.PROJECT)}
                 onDragEnd={onDragEnd}
-                style={{ ...getSectionContainerStyle(FORM_SECTIONS.PROJECT), marginTop: "9px" }}
+                style={{ ...getSectionContainerStyle(FORM_SECTIONS.PROJECT), marginTop: "9px", position: "relative" }}
             >
                 <h2
                     style={{ fontSize: "18px", fontWeight: "bold", textTransform: "uppercase", paddingBottom: "4px", marginBottom: "0px", lineHeight: "1.2", display: "inline-block" }}
                 >
                     Projects
                 </h2>
+                {onEditSection && (
+                    <button style={editBtnStyle} onClick={(e) => { e.stopPropagation(); onEditSection(FORM_SECTIONS.PROJECT); }} type="button">
+                        Edit
+                    </button>
+                )}
 
                 <div style={{
                     height: "1px",
@@ -293,13 +323,18 @@ export default function useResumeSection({
                 onDragOver={(e) => onDragOver(e, FORM_SECTIONS.CERTIFICATIONS)}
                 onDrop={(e) => onDrop(e, FORM_SECTIONS.CERTIFICATIONS)}
                 onDragEnd={onDragEnd}
-                style={{ ...getSectionContainerStyle(FORM_SECTIONS.CERTIFICATIONS), marginTop: "9px" }}
+                style={{ ...getSectionContainerStyle(FORM_SECTIONS.CERTIFICATIONS), marginTop: "9px", position: "relative" }}
             >
                 <h2
                     style={{ fontSize: "18px", fontWeight: "bold", textTransform: "uppercase", paddingBottom: "4px", marginBottom: "0px", lineHeight: "1.2", display: "inline-block" }}
                 >
                     Certifications
                 </h2>
+                {onEditSection && (
+                    <button style={editBtnStyle} onClick={(e) => { e.stopPropagation(); onEditSection(FORM_SECTIONS.CERTIFICATIONS); }} type="button">
+                        Edit
+                    </button>
+                )}
 
                 <div style={{
                     height: "1px",

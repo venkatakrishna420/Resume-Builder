@@ -35,7 +35,7 @@ export const dummyData = {
     {
       displayQuestion: "email",
       id: "intro-5",
-      type: "mail",
+      type: "email",
       answer: "john@example.com",
       icon: HiOutlineMail,
     },

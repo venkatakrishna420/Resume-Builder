@@ -2,7 +2,6 @@
 
 import { Navigate } from "react-router-dom";
 import { ROUTES_PATH } from "../constant";
-import { useState } from "react";
 
 const ProtectedRoute = ({ route, children }) => {
     // Check if user selected any templates and we have data in local storage

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { updateData, updateFormRender, updateBackRender, } from "../features/formDataSlice";
 // import {updateStoreData} from "../features/formDataSlice";
-import { FORM_SECTIONS, getLabel, SECTION_TITLES, isRequiredFieldsFilled, validateField, } from "../constant";
+import { FORM_SECTIONS, getLabel, SECTION_TITLES, isRequiredFieldsFilled, validateField, ROUTES_PATH } from "../constant";
 import { useNavigate } from "react-router-dom";
 import RenderingBasicForm from "./RenderBasicForm";
 import NestedForm from "./NestedForm";
@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 // import {useMemo} from "react"
 
 function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
+    const formData = useSelector((state) => state.formData);
     const currentForm = useSelector((state) => state.formData.currentForm);
     const renderingArray = useSelector((state) => state.formData.renderingQuestions);
     const darkMode = useSelector((state) => state.theme);
@@ -35,15 +36,22 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
         if (!isRequiredFieldsFilled(renderingArray)) {
             return;
         }
-        // Data update in store (MOVED BEFORE THE IF CHECK)
-        dispatch(updateFormRender());
 
-        // Check if current form is last form - USE isFinalSection instead!
+        // Persist current form data before proceeding
+        localStorage.setItem("userData", JSON.stringify(formData));
+
+        // Check if current form is last form
         if (isFinalSection) {
             // Mark all forms as filled
             localStorage.setItem("isAllFormsFilled", "true");
-            navigate("/preview");
+            localStorage.setItem("submittedFormCount", submittedFormCount);
+            navigate(ROUTES_PATH.PREVIEW);
+            return;
         }
+
+        // Data update in store (only advance if NOT final section)
+        dispatch(updateFormRender());
+
         // Update count of form submitted count in local storage
         localStorage.setItem("submittedFormCount", submittedFormCount + 1);
 
@@ -165,6 +173,7 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
                             section={currentForm}
                             labelFormatter={(key) => getLabel(currentForm, key)}
                             inputChange={inputChange}
+                            errors={errors}
                         />
                     ) : (
                         <RenderingBasicForm
