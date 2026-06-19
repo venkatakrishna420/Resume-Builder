@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+// import { useRef } from 'react'
 import PreviewResume from './PreviewResume';
 import { useDispatch, useSelector } from 'react-redux';
-import { FORM_SECTIONS, ROUTES_PATH } from '../constant';
-import { updateStoreData, setCurrentFormSection } from '../features/formDataSlice';
+import { FORM_SECTIONS } from '../constant';
+import { updateStoreData } from '../features/formDataSlice';
 import useDragAndDrop from '../utils/dragAndDrop/dragAndDrop';
 import useResumeSection from '../utils/resume_template1_sections/allSections.jsx';
-import { useNavigate } from 'react-router-dom';
 
 function PreviewWraper() {
     const data = useSelector((state) => state.formData)
@@ -13,12 +13,6 @@ function PreviewWraper() {
     console.log(data, 'data from store in wrapper check')
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    const onEditSection = (section) => {
-        dispatch(setCurrentFormSection(section));
-        navigate(ROUTES_PATH.FORM_SECTIONS);
-    }
 
 
     // This function checks whether a section has at least one answered field
@@ -82,8 +76,7 @@ function PreviewWraper() {
         onDragOver,
         onDrop,
         onDragEnd,
-        getSectionContainerStyle,
-        onEditSection
+        getSectionContainerStyle
     });
 
 
@@ -109,7 +102,7 @@ function PreviewWraper() {
 
     return (
         <div>
-            {userData && <PreviewResume userData={userData} isAllRequiredFilled={isAllRequiredFilled} sectionRenderMap={sectionRenderMap} getAns={getAns} sectionsOrder={sectionsOrder} onEditSection={onEditSection} />}
+            {userData && <PreviewResume userData={userData} isAllRequiredFilled={isAllRequiredFilled} sectionRenderMap={sectionRenderMap} getAns={getAns} sectionsOrder={sectionsOrder} />}
 
         </div>
     )
