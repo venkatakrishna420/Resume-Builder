@@ -3,7 +3,7 @@ import axios from "axios";
 // Call gemini api with and return optimised text with given maxLength and minLength
 export async function enhanceText(inputText, maxLength = 800, minLength = 300) {
   if (!inputText || !inputText.trim()) {
-    return { error: "Input cannot be empty." };
+    throw new Error("Input cannot be empty.");
   }
 
   const trimmed = inputText.trim();
@@ -39,28 +39,28 @@ export async function enhanceText(inputText, maxLength = 800, minLength = 300) {
     const aiText = response?.data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!aiText) {
-      return { error: "AI returned empty response." };
+      throw new Error("AI returned empty response.");
     }
 
     const finalText = aiText.trim();
 
     // Optional safety check — ensures AI followed length rules
     if (finalText.length < minLength || finalText.length > maxLength) {
-      return { error: "AI could not produce text within the required length." };
+      throw new Error("AI could not produce text within the required length.");
     }
 
     // return { text: finalText };
     return finalText;
   } catch (error) {
     console.error(error);
-    return { error: "AI enhancement failed." };
+    throw new Error("AI enhancement failed.");
   }
 }
 
 // Call Groq (Llama 3) API and return optimized text
 export async function enhanceTextLlama(inputText, maxLength = 800, minLength = 300) {
   if (!inputText || !inputText.trim()) {
-    return { error: "Input cannot be empty." };
+    throw new Error("Input cannot be empty.");
   }
 
   const trimmed = inputText.trim();
@@ -100,7 +100,7 @@ export async function enhanceTextLlama(inputText, maxLength = 800, minLength = 3
     const aiText = response?.data?.choices?.[0]?.message?.content;
 
     if (!aiText) {
-      return { error: "AI returned empty response." };
+      throw new Error("AI returned empty response.");
     }
 
     const finalText = aiText.trim();
@@ -108,6 +108,6 @@ export async function enhanceTextLlama(inputText, maxLength = 800, minLength = 3
     return finalText;
   } catch (error) {
     console.error(error);
-    return { error: "Llama AI enhancement failed." };
+    throw new Error("Llama AI enhancement failed.");
   }
 }

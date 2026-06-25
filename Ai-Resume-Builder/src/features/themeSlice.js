@@ -12,13 +12,13 @@ function  encryptTheme(){
   const encryptedKey = encryptData(STORAGE_KEY);
   
   // Get value from localStorage
-  const encryptValue = localStorage.getItem(encryptedKey);
+  const encryptedValue = localStorage.getItem(encryptedKey);
 
   // if nothing  is saved yet  default false
-  if(!encryptValue) return false;
+  if(!encryptedValue) return false;
 
   // Get value from localStorage
-  const decryptValue = decryptData(encryptValue)
+  const decryptValue = decryptData(encryptedValue)
 
   // Convert string to boolean
   return decryptValue === "true";

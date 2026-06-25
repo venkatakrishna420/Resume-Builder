@@ -1,7 +1,4 @@
-
-
-import React from "react";
-import { IoHome, IoMoon, IoSunnyOutline } from "react-icons/io5";
+import { IoMoon, IoSunnyOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/themeSlice";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +29,7 @@ function NavBar() {
       </div>
 
       <button
-        onClick={() => setDarkMode(!darkMode)}
+        onClick={setDarkMode}
         className={`p-1.5 rounded-full cursor-pointer hover:scale-110 transition shadow-md
           ${darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-blue-900"}`}
       >
