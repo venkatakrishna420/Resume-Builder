@@ -171,15 +171,12 @@ function Preview() {
       }`}
     >
       {/* Resume Preview */}
-      <PreviewWraper />
-
-      {/* Right Side Empty Area */}
-      <div className="hide w-2/5 flex justify-center items-center text-gray-500 italic">
-        <p>Preview your resume on the left.</p>
+      <div className="w-full flex justify-center">
+        <PreviewWraper />
       </div>
 
       {/* Bottom Right Button Group */}
-      <div className="hide fixed bottom-8 right-10 flex gap-4">
+      <div className="fixed bottom-8 right-10 flex gap-4">
         
         {/* Back Button */}
         <button
