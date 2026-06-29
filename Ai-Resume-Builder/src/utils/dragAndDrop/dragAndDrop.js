@@ -47,7 +47,8 @@ export default function useDragAndDrop(initialSections) {
             if (srcIndex === -1 || tgtIndex === -1) return prev;
 
             newOrder.splice(srcIndex, 1);
-            newOrder.splice(tgtIndex, 0, sourceId);
+            const adjustedTgt = srcIndex < tgtIndex ? tgtIndex - 1 : tgtIndex;
+            newOrder.splice(adjustedTgt, 0, sourceId);
             return newOrder;
         });
 

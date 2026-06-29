@@ -26,16 +26,14 @@ function Home() {
       selectedQuestions = templateOneInitialState
     } else if (selectedTemplate.id === TEMPLATES_ID.TEMPLATE_2) {
       selectedQuestions = templateTwoInitialState
+    } else {
+      return;
     }
 
     // Update intial state from users store
     dispatch(updateStoreData(selectedQuestions));
     // Add data in local storage so data is retrieved on refresh
    localStorage.setItem("userData",JSON.stringify(selectedQuestions));
-
-      // Encrypt before saving to localStorage
-    // const encryptedData = encryptData(JSON.stringify(selectedQuestions));
-    // localStorage.setItem("userData", encryptedData);
 
     navigate("/userDetails");
   }

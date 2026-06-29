@@ -89,7 +89,7 @@ function PreviewResume({
             flexWrap: "wrap",
           }}
         >
-          {iconsArr.map((item) => {
+          {iconsArr.map((item, index) => {
             const conf = CONTACT_MAP[item.icon] || {};
 
             return (
@@ -124,7 +124,7 @@ function PreviewResume({
                   </span>
                 )}
 
-                <span>|</span>
+                {index < iconsArr.length - 1 && <span>|</span>}
               </div>
             );
           })}

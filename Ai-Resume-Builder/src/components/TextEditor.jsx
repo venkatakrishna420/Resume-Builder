@@ -68,18 +68,12 @@ const TextEditor = ({ item, inputChange, subsectionKey }) => {
 
       } catch (err) {
         // show a friendly message and also log the underlying error
+        setError(err.message || "AI enhancement failed.");
         console.error("AI call failed:", err.message || err);
         return;
       }
-      // setContent is synchronous-ish but returns nothing — still await in case plugin returns a promise
+      // setContent triggers onEditorChange → handleEditorChange → inputChange (correct call)
       await editorRef.current.setContent(aiSuggestionResult);
-
-      // update Redux using the same inputChange function you already use.
-      // Make sure your inputChange signature matches: (value, id, subsectionKey)
-      inputChange(aiSuggestionResult, item.id, subsectionKey);
-
-      // Optional: force validation/run the handler that your editor change normally uses:
-      handleEditorChange(aiSuggestionResult);
 
     } finally {
       setIsAILoading(false);
