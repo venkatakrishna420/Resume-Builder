@@ -103,8 +103,11 @@ function FormContainer({ setSubmittedFormCount, submittedFormCount }) {
     // Previous Button Handler
     function goBack() {
         dispatch(updateBackRender());
-        // when th eform count 0 then prev-1 = -1 it will get issue
-        setSubmittedFormCount((prev) => Math.max(prev - 1, 0));
+        setSubmittedFormCount((prev) => {
+            const nextCount = Math.max(prev - 1, 1);
+            localStorage.setItem("submittedFormCount", String(nextCount));
+            return nextCount;
+        });
     }
 
 

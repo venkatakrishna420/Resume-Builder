@@ -2,26 +2,27 @@
 
 import { Navigate } from "react-router-dom";
 import { ROUTES_PATH } from "../constant";
+import { readSavedDraft } from "../utils/resumeDraft";
 
 const ProtectedRoute = ({ route, children }) => {
-    // Check if user selected any templates and we have data in local storage
-    const userData = localStorage.getItem("userData");
+    const hasValidUserData = Boolean(readSavedDraft());
+    const isAllFormsFilled = localStorage.getItem("isAllFormsFilled") === "true";
 
-    // Check if all forms filled
-    const isAllFormsFilled = localStorage.getItem("isAllFormsFilled") === "true"; // STRICT CHECK
-
-    //  Block direct access to FORM & PREVIEW if user didn't select any templates
-    if ((route === ROUTES_PATH.FORM_SECTIONS || route === ROUTES_PATH.PREVIEW) && !userData) {
+    if (
+        [ROUTES_PATH.FORM_SECTIONS, ROUTES_PATH.PREVIEW, ROUTES_PATH.RESUME_SUCCESS].includes(route) &&
+        !hasValidUserData
+    ) {
         return <Navigate to={ROUTES_PATH.HOME} replace />;
     }
 
-    // console.log(route === ROUTES_PATH.PREVIEW && !isAllFormsFilled,route,!isAllFormsFilled)
-    //  Block preview if any form is NOT submitted
-    if (route === ROUTES_PATH.PREVIEW && !isAllFormsFilled) {
+    if ([ROUTES_PATH.PREVIEW, ROUTES_PATH.RESUME_SUCCESS].includes(route) && !isAllFormsFilled) {
         return <Navigate to={ROUTES_PATH.FORM_SECTIONS} replace />;
     }
 
-    // Allow render
+    if (route === ROUTES_PATH.RESUME_SUCCESS && localStorage.getItem("downloadCompleted") !== "true") {
+        return <Navigate to={ROUTES_PATH.PREVIEW} replace />;
+    }
+
     return children;
 };
 

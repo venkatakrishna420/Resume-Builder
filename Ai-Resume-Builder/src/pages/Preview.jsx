@@ -135,6 +135,7 @@ function Preview() {
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.save("resume.pdf");
+      localStorage.setItem("downloadCompleted", "true");
 
       // RESTORE old styles
       input.style.background = previousBg;
@@ -152,6 +153,8 @@ function Preview() {
   };
 
   const handleBack = () => {
+  localStorage.removeItem("isAllFormsFilled");
+  localStorage.removeItem("downloadCompleted");
   navigate(ROUTES_PATH.FORM_SECTIONS);
 };
 
@@ -168,7 +171,7 @@ function Preview() {
     <div
       className={`min-h-screen flex p-8 transition-colors ${
         darkMode ? "bg-gray-700 text-white" : "bg-gray-50 text-gray-900"
-      }`}
+      } pt-20`}
     >
       {/* Resume Preview */}
       <div className="w-full flex justify-center">

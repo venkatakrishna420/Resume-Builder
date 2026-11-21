@@ -32,13 +32,14 @@ function PreviewResume({
     },
   };
 
-  const intro = userData?.intro || [];
+  const intro = Array.isArray(userData?.intro) ? userData.intro : [];
 
   let userName = ""
   const iconsArr = []
-  intro.map((item) => {
-    if (item.displayQuestion.toLowerCase().includes("name")) userName += item.answer + " "
-    else {
+  intro.forEach((item) => {
+    const label = item?.displayQuestion?.toLowerCase?.() || "";
+    if (label.includes("name")) userName += (item?.answer || "") + " "
+    else if (item) {
       iconsArr.push(item)
     }
   })

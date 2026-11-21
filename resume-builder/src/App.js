@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './pages/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Form from './pages/Form';
 import Preview from './pages/Preview';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/userDetails' element={<Form />}/>
         <Route path='/download-resume' element={<Preview />}/>
+        <Route path='*' element={<NotFound />} />
       </Routes>
       
     </BrowserRouter>

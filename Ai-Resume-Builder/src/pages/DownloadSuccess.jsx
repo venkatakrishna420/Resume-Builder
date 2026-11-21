@@ -7,7 +7,7 @@ export default function DownloadSuccess() {
     const navigate = useNavigate()
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 to-white p-6">
+        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-50 to-white p-6 pt-20">
             <div className="bg-white max-w-lg w-full shadow-2xl rounded-3xl p-10 border border-gray-200 relative overflow-hidden">
 
                 {/* Glow */}

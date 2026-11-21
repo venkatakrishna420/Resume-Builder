@@ -23,7 +23,7 @@ function PreviewWraper() {
         // If the section is an array (ex: list of questions)
         if (Array.isArray(section)) {
             // Check if ANY question has a non-empty answer
-            return section.some((question) => question?.answer?.trim());
+            return section.some((question) => String(question?.answer ?? "").trim());
         }
 
         // If the section is an object (ex: education: { school: [], college: [] })
@@ -33,7 +33,7 @@ function PreviewWraper() {
                 .some((subArray) =>
                     Array.isArray(subArray) &&
                     // Check if ANY item in that array has a non-empty answer
-                    subArray.some(q => q?.answer?.trim())
+                    subArray.some(q => String(q?.answer ?? "").trim())
                 );
         }
 
@@ -43,7 +43,8 @@ function PreviewWraper() {
 
     // Get answer from a specific index inside a sub-array
     function getAns(sectionArray, questionLabel) {
-        return sectionArray?.find(q => q.displayQuestion === questionLabel)?.answer || "";
+        if (!Array.isArray(sectionArray)) return "";
+        return sectionArray.find((question) => question?.displayQuestion === questionLabel)?.answer || "";
     }
 
     const initialSections = [FORM_SECTIONS.SKILLS, FORM_SECTIONS.PROJECT, FORM_SECTIONS.EDUCATION, FORM_SECTIONS.CERTIFICATIONS];
@@ -79,7 +80,14 @@ function PreviewWraper() {
     useEffect(() => {
         const stored = localStorage.getItem("userData");
         if (stored && (!userData || Object.keys(userData).length === 0)) {
-            const localStorageData = JSON.parse(stored)
+            let localStorageData;
+            try {
+                localStorageData = JSON.parse(stored);
+            } catch (error) {
+                console.error("Corrupted localStorage userData:", error);
+                return;
+            }
+            if (!localStorageData || typeof localStorageData !== "object") return;
             setUserData(localStorageData)
             dispatch(updateStoreData(localStorageData))
         }

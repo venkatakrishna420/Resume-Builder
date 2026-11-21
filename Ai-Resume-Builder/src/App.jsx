@@ -8,6 +8,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ROUTES_PATH } from './constant';
 import DownloadSuccess from './pages/DownloadSuccess.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 function App() {
 
@@ -39,7 +40,15 @@ function App() {
             }
           />
           {/* Download Resume Success Page */}
-          <Route path={ROUTES_PATH.RESUME_SUCCESS} element={<DownloadSuccess />} />
+          <Route
+            path={ROUTES_PATH.RESUME_SUCCESS}
+            element={
+              <ProtectedRoute route={ROUTES_PATH.RESUME_SUCCESS}>
+                <DownloadSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ErrorBoundary>
 
