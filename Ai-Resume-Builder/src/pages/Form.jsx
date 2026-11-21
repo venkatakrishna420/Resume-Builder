@@ -46,7 +46,7 @@ function Form() {
 
         <div
             className={`${darkMode ? "bg-gray-700 text-white" : "bg-white text-gray-900"
-                } w-full h-screen flex flex-col items-center pt-6 p-4 transition-colors`}
+                } w-full min-h-screen flex flex-col items-center pt-20 p-4 transition-colors`}
         >
             {/* Progress Bar on TOP */}
             <div className="w-full max-w-xl mb-4">

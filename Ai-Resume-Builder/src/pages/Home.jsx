@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaLock, FaTimes } from "react-icons/fa";
-import { templates, TEMPLATES_ID } from "../constant";
+import { ROUTES_PATH, templates, TEMPLATES_ID } from "../constant";
 import { useDispatch, useSelector } from "react-redux";
 // import { dispatch } from "react-redux";
-import { clearStoreData, updateStoreData } from "../features/formDataSlice";
+import { updateStoreData } from "../features/formDataSlice";
 import templateOneInitialState from "../utils/templatesQuestions/template_1";
 import templateTwoInitialState from "../utils/templatesQuestions/template_2";
+import { readSavedDraft } from "../utils/resumeDraft";
 // import { encryptData } from "../utils/Encryption"; 
 
 function Home() {
@@ -15,6 +16,15 @@ function Home() {
   const dispatch = useDispatch()
   const darkMode = useSelector((state) => state.theme)
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [savedDraft] = useState(readSavedDraft);
+
+  function resumeDraft() {
+    if (!savedDraft) return;
+    localStorage.removeItem("isAllFormsFilled");
+    localStorage.removeItem("downloadCompleted");
+    dispatch(updateStoreData(savedDraft));
+    navigate(ROUTES_PATH.FORM_SECTIONS);
+  }
 
   // Update questions based on selected form
   function handleProceed() {
@@ -30,23 +40,16 @@ function Home() {
       return;
     }
 
-    // Update intial state from users store
+    // Starting with a new template resets completion state for the previous draft.
+    localStorage.removeItem("submittedFormCount");
+    localStorage.removeItem("isAllFormsFilled");
+    localStorage.removeItem("downloadCompleted");
+
     dispatch(updateStoreData(selectedQuestions));
-    // Add data in local storage so data is retrieved on refresh
-   localStorage.setItem("userData",JSON.stringify(selectedQuestions));
+    localStorage.setItem("userData", JSON.stringify(selectedQuestions));
 
-    navigate("/userDetails");
+    navigate(ROUTES_PATH.FORM_SECTIONS);
   }
-
-
-
-  // Remove data from local storage and store
-  useEffect(() => {
-    localStorage.removeItem("userData")
-    localStorage.removeItem("submittedFormCount")
-     localStorage.removeItem("isAllFormsFilled")  
-    dispatch(clearStoreData())
-  }, [])
 
 
   return (
@@ -63,7 +66,7 @@ function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative flex-1 flex items-center justify-center px-3 md:px-4 py-3">
+      <section className="relative flex-1 flex items-center justify-center px-3 md:px-4 pt-14 pb-3">
         <div className="max-w-5xl w-full grid md:grid-cols-2 gap-4 lg:gap-6 items-start">
 
           {/* Left Content */}
@@ -75,6 +78,16 @@ function Home() {
             <p className={`text-xs md:text-sm ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
               Choose the perfect template for your career stage and land your dream job effortlessly.
             </p>
+
+            {savedDraft && (
+              <button
+                type="button"
+                onClick={resumeDraft}
+                className="self-start rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
+              >
+                Continue saved resume
+              </button>
+            )}
 
             {/* Templates Grid */}
             <div className="grid grid-cols-2 gap-2 pt-2">

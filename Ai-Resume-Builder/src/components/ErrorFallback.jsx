@@ -3,13 +3,14 @@
 // user to the home page while also resetting the error boundary.
 
 import { useNavigate } from "react-router-dom";
+import { ROUTES_PATH } from "../constant";
 
 function ErrorFallback({ resetErrorBoundary }) {
   const navigate = useNavigate();
 
   const goHome = () => {
     resetErrorBoundary();
-    navigate("/");
+    navigate(ROUTES_PATH.HOME);
   };
 
   return (

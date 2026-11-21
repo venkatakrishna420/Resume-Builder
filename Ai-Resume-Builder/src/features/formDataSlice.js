@@ -46,6 +46,9 @@ const formDataSlice = createSlice({
 
             }
 
+            // Keep the current section recoverable if the user leaves the form.
+            localStorage.setItem("userData", JSON.stringify(state));
+
         },
 
         // On submit of form
