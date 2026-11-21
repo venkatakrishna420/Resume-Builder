@@ -2,11 +2,16 @@
 // illustration and a “Go to Home” button. It uses `useNavigate` to programmatically redirect the 
 // user to the home page while also resetting the error boundary.
 
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES_PATH } from "../constant";
 
-function ErrorFallback({ resetErrorBoundary }) {
+function ErrorFallback({ error, resetErrorBoundary }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.error("Resume Builder render error:", error);
+  }, [error]);
 
   const goHome = () => {
     resetErrorBoundary();
@@ -36,6 +41,12 @@ function ErrorFallback({ resetErrorBoundary }) {
         <img src="https://files.catbox.moe/6ykago.png" alt="Error Icon" className="w-10 h-10" />
         Something went wrong
       </h2>
+
+      {import.meta.env.DEV && error?.message && (
+        <pre className="max-w-3xl overflow-auto rounded bg-red-50 p-4 text-left text-sm text-red-800">
+          {error.message}
+        </pre>
+      )}
 
 
 
